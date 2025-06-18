@@ -38,7 +38,7 @@ def server_receive():
             return jsonify({"status": "error", "message": "Timestamp expired!", "timestamp": timestamp}), 400
         
         response_payload = {
-            "message": "Encryption and Verification Successful",
+           "message": f"Encryption and Verification Successful and your message is {msg}",
             "timestamp": int(time.time())
         }
         response_message = json.dumps(response_payload).encode()
