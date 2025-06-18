@@ -13,6 +13,9 @@ client_pub=process.env.CLINT_PUB;
 
 @app.route("/receive", methods=["POST"])
 def server_receive():
+    token = request.headers.get("X-API-TOKEN")
+    if token != API_SECRET:
+        return jsonify({"status": "error", "message": "Unauthorized"}), 401
     try:
         data = request.get_json()
         encrypted = bytes.fromhex(data['encrypted'])
