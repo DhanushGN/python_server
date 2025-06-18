@@ -2,15 +2,14 @@ from flask import Flask, request, jsonify
 import rsa
 import json
 import time
+import os
 
 app = Flask(__name__)
 
 # Load keys
-with open("server_private.pem", "rb") as f:
-    server_priv = rsa.PrivateKey.load_pkcs1(f.read())
-
-with open("clint_public.pem", "rb") as f:
-    client_pub = rsa.PublicKey.load_pkcs1(f.read())
+API_SECRET = process.env.AUTH_TOKEN;
+server_priv=process.env.SERVER_PRIV;
+client_pub=process.env.CLINT_PUB;
 
 @app.route("/receive", methods=["POST"])
 def server_receive():
