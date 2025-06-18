@@ -3,7 +3,7 @@ import rsa
 import json
 import time
 import os
-
+import base64
 app = Flask(__name__)
 
 # Load from environment
