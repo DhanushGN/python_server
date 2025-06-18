@@ -6,10 +6,13 @@ import os
 
 app = Flask(__name__)
 
-# Load keys
-API_SECRET = process.env.AUTH_TOKEN;
-server_priv=process.env.SERVER_PRIV;
-client_pub=process.env.CLINT_PUB;
+# Load from environment
+API_SECRET = os.environ.get("AUTH_TOKEN")
+
+# If PEM keys are stored as base64 strings in Render
+server_priv = base64.b64decode(os.environ.get("SERVER_PRIV"))
+client_pub = base64.b64decode(os.environ.get("CLINT_PUB"))
+
 
 @app.route("/receive", methods=["POST"])
 def server_receive():
